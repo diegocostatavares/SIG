@@ -1,5 +1,3 @@
-# Laravel 5
 storage/*.key
-.env.*.php
-.env.php
+.env.*
 .env

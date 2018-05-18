@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/D:/wamp64/www/mestrao/app/Http/Controllers/Site/ContatosController.php</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/layouts/_includes/header_start.blade.php</file>
+            <file>file:/D:/wamp64/www/mestrao/.env</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/layouts_site/_includes/footer_start.blade.php</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/layouts_site/site.blade.php</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/layouts_site/internas.blade.php</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/site/canais/contato.blade.php</file>
+            <file>file:/D:/wamp64/www/mestrao/routes/web.php</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/layouts_site/_includes/header_start.blade.php</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/site/canais/canais.blade.php</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/layouts_site/_includes/header_end.blade.php</file>
+            <file>file:/D:/wamp64/www/mestrao/resources/views/site/canais/resposta.blade.php</file>
+        </group>
+    </open-files>
+</project-private>
