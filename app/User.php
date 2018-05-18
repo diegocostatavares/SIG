@@ -27,10 +27,10 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    public function isSuperAdmin()
-    {
-        return ($this->hasRole('root')) ? true : false;
-    }
+    // public function isSuperAdmin()
+    // {
+    //     return ($this->hasRole('root')) ? true : false;
+    // }
 
     /**
      * Relation Roles

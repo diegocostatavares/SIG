@@ -7,6 +7,7 @@ use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvid
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Cache;
 use App\Permission;
+use App\User;
 use View;
 //use Schema;
 
@@ -28,34 +29,42 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+
+        //=============================================================
+        // REGISTRANDO POLITICAS
+        //=============================================================
+
         $this->registerPolicies();
 
+
+        //=============================================================
+        // ANTES DE DEFINIR PERMISSOES, VERIFICA SE USUARIO É ROOT
+        // SE FOR SUPER USUARIO, LIBERA TUDO AGORA MESMO.
+        //=============================================================
         Gate::before(function ($user, $ability) {
 
-            if ($user->isSuperAdmin()) {
+            if($user->roles->contains('name','root')) {
+
                 return true;
             }
-        });
+        }); 
         
+
+        //=============================================================
+        // VALIDA PERMISSOES DE USUARIO LOGADO
+        //=============================================================
         Gate::define('auth', function ($user, $alias=NULL) {
 
-            if (!Cache::has('auth_permissions')) {
+            $vet_permission_name = [];
 
-                $vet_permission_name = [];
+            foreach ($user->roles as $k_roles => $v_roles) {
 
-                foreach ($this->getPermissions() as $permission) {
-
-                    if($user->hasRole($permission->roles)){
+                foreach ($v_roles->permissions as $permission) {
 
                         $vet_permission_name[] = $permission->name;
-                    };
-
                 }
-
-                Cache::put('auth_permissions', $vet_permission_name, 1);
             }
 
-            $vet_permission_name = Cache::get('auth_permissions');
 
             if ($alias==NULL) {
                 
@@ -84,19 +93,6 @@ class AuthServiceProvider extends ServiceProvider
 
             }
         });
-    }
-
-    /**
-     * Get all permissions
-     * @return array
-     */
-    protected function getPermissions()
-    {
-        try {
-            return Permission::with('roles')->get();
-        } catch(\Exception $e) {
-            return [];
-        }
     }
 
 }

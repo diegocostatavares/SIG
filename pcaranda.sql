@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50721
 File Encoding         : 65001
 
-Date: 2018-05-18 09:27:23
+Date: 2018-05-18 17:20:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -175,12 +175,13 @@ CREATE TABLE `migrations` (
   `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `batch` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of migrations
 -- ----------------------------
 INSERT INTO `migrations` VALUES ('1', '2018_05_15_203933_create_roles_permissions_table', '1');
+INSERT INTO `migrations` VALUES ('2', '2018_05_18_172051_create_teste_table', '2');
 
 -- ----------------------------
 -- Table structure for passeios
@@ -256,7 +257,7 @@ CREATE TABLE `permissions` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- ----------------------------
 -- Records of permissions
@@ -265,7 +266,12 @@ INSERT INTO `permissions` VALUES ('1', 'admin.dashboard', 'Dashboard', '2018-05-
 INSERT INTO `permissions` VALUES ('2', 'admin.conteudo.canais', 'Canais [Listar]', '2018-05-15 16:50:06', '2018-05-15 16:50:06');
 INSERT INTO `permissions` VALUES ('3', 'admin.conteudo.canais.cadastrar', 'Canais [Cadastrar]', '2018-05-15 16:50:06', '2018-05-15 16:50:06');
 INSERT INTO `permissions` VALUES ('4', 'register', 'Registrar', null, null);
-INSERT INTO `permissions` VALUES ('6', 'admin.root.usuarios', 'Usuarios [Listar]', null, null);
+INSERT INTO `permissions` VALUES ('7', 'admin.root.usuarios', 'Usuarios [Listar]', null, null);
+INSERT INTO `permissions` VALUES ('8', 'admin.root.usuarios.cadastrar', 'Usuarios [Cadastrar]', null, null);
+INSERT INTO `permissions` VALUES ('9', 'admin.root.usuarios.salvar', 'Usuarios [Salvar]', null, null);
+INSERT INTO `permissions` VALUES ('10', 'admin.root.usuarios.editar', 'Usuarios [Editar]', null, null);
+INSERT INTO `permissions` VALUES ('11', 'admin.root.usuarios.excluir', 'Usuarios [Excluir]', null, null);
+INSERT INTO `permissions` VALUES ('12', 'admin.root', 'Root Home', null, null);
 
 -- ----------------------------
 -- Table structure for permission_role
@@ -284,6 +290,11 @@ CREATE TABLE `permission_role` (
 INSERT INTO `permission_role` VALUES ('2', '1');
 INSERT INTO `permission_role` VALUES ('2', '2');
 INSERT INTO `permission_role` VALUES ('2', '3');
+INSERT INTO `permission_role` VALUES ('2', '7');
+INSERT INTO `permission_role` VALUES ('2', '8');
+INSERT INTO `permission_role` VALUES ('2', '9');
+INSERT INTO `permission_role` VALUES ('2', '10');
+INSERT INTO `permission_role` VALUES ('2', '11');
 INSERT INTO `permission_role` VALUES ('3', '6');
 
 -- ----------------------------
@@ -323,10 +334,10 @@ CREATE TABLE `role_user` (
 INSERT INTO `role_user` VALUES ('1', '1');
 INSERT INTO `role_user` VALUES ('2', '1');
 INSERT INTO `role_user` VALUES ('2', '2');
-INSERT INTO `role_user` VALUES ('4', '2');
+INSERT INTO `role_user` VALUES ('3', '2');
 INSERT INTO `role_user` VALUES ('1', '3');
 INSERT INTO `role_user` VALUES ('2', '3');
-INSERT INTO `role_user` VALUES ('3', '3');
+INSERT INTO `role_user` VALUES ('4', '3');
 
 -- ----------------------------
 -- Table structure for roteiros_apartamentos
@@ -468,6 +479,89 @@ INSERT INTO `roteiros_transportes` VALUES ('3', 'Transfer Privativo (carro com a
 INSERT INTO `roteiros_transportes` VALUES ('4', '* Horário do Transporte Campo Grande x Bonito  - Saídas previstas de Campo Grande as 09:30 - 14:30 -  18:00 - 23:00 hs - R$ 100,00\r\n\r\n\r\n* Horário do Transporte Bonito x Campo Grande - Saídas previstas de Bonito as  07:30 - 10:00 - 12:30 - 18:30 hs - R$ 100,00', '100');
 
 -- ----------------------------
+-- Table structure for routes
+-- ----------------------------
+DROP TABLE IF EXISTS `routes`;
+CREATE TABLE `routes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `link` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `alias` varchar(200) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `uses` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `method` enum('get','post','put','patch','delete','resource') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'get',
+  `auth` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `alias` (`alias`) USING BTREE,
+  UNIQUE KEY `link` (`link`,`method`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=46 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of routes
+-- ----------------------------
+INSERT INTO `routes` VALUES ('1', '/', 'home', 'Site\\HomeController@index', 'get', '0', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('2', '/hotel', 'site.hotel', 'Site\\ConteudoController@pousada', 'get', '0', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('3', '/tarifarios', 'site.tarifarios', 'Site\\ConteudoController@tarifarios', 'get', '0', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('4', '/roteiros', 'site.roteiros', 'Site\\roteirosController@index', 'get', '0', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('5', '/passeios', 'site.passeios', 'Site\\PasseiosController@index', 'get', '0', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('6', '/contato', 'site.contato', 'Site\\ContatosController@index', 'get', '0', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('7', '/contato', 'site.contato.envia', 'Site\\ContatosController@envia', 'post', '0', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('8', '/logout', 'logout', 'Auth\\LoginController@logout', 'get', '0', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('9', '/admin', 'admin.dashboard', 'Admin\\AdminController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('10', '/admin/root', 'admin.root', 'Admin\\Root\\HomeController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('11', '/admin/root/usuarios', 'admin.root.usuarios', 'Admin\\Root\\UsersController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('12', '/admin/root/usuarios/cadastrar', 'admin.root.usuarios.cadastrar', 'Admin\\Root\\UsersController@cadastrar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('13', '/admin/root/usuarios/cadastrar', 'admin.root.usuarios.salvar', 'Admin\\Root\\UsersController@salvar', 'post', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('14', '/admin/root/usuarios/editar/{id}', 'admin.root.usuarios.editar', 'Admin\\Root\\UsersController@editar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('15', '/admin/root/usuarios/excluir/{id}', 'admin.root.usuarios.excluir', 'Admin\\Root\\UsersController@excluir', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('16', '/admin/conteudo/canais', 'admin.conteudo.canais', 'Admin\\Conteudo\\CanaisController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('17', '/admin/conteudo/canais/cadastrar', 'admin.conteudo.canais.cadastrar', 'Admin\\Conteudo\\CanaisController@cadastrar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('18', '/admin/conteudo/canais/cadastrar', 'admin.conteudo.canais.salvar', 'Admin\\Conteudo\\CanaisController@salvar', 'post', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('19', '/admin/conteudo/canais/editar/{id}', 'admin.conteudo.canais.editar', 'Admin\\Conteudo\\CanaisController@editar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('20', '/admin/conteudo/canais/excluir/{id}', 'admin.conteudo.canais.excluir', 'Admin\\Conteudo\\CanaisController@excluir', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('21', '/admin/conteudo/destaques', 'admin.conteudo.destaques', 'Admin\\Conteudo\\DestaquesController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('22', '/admin/conteudo/destaques/cadastrar', 'admin.conteudo.destaques.cadastrar', 'Admin\\Conteudo\\DestaquesController@cadastrar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('23', '/admin/conteudo/destaques/cadastrar', 'admin.conteudo.destaques.salvar', 'Admin\\Conteudo\\DestaquesController@salvar', 'post', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('24', '/admin/conteudo/destaques/editar/{id}', 'admin.conteudo.destaques.editar', 'Admin\\Conteudo\\DestaquesController@editar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('25', '/admin/conteudo/destaques/excluir/{id}', 'admin.conteudo.destaques.excluir', 'Admin\\Conteudo\\DestaquesController@excluir', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('26', '/admin/conteudo/depoimentos', 'admin.conteudo.depoimentos', 'Admin\\Conteudo\\DepoimentosController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('27', '/admin/conteudo/depoimentos/cadastrar', 'admin.conteudo.depoimentos.cadastrar', 'Admin\\Conteudo\\DepoimentosController@cadastrar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('28', '/admin/conteudo/depoimentos/cadastrar', 'admin.conteudo.depoimentos.salvar', 'Admin\\Conteudo\\DepoimentosController@salvar', 'post', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('29', '/admin/conteudo/depoimentos/editar/{id}', 'admin.conteudo.depoimentos.editar', 'Admin\\Conteudo\\DepoimentosController@editar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('30', '/admin/conteudo/depoimentos/excluir/{id}', 'admin.conteudo.depoimentos.excluir', 'Admin\\Conteudo\\DepoimentosController@excluir', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('31', '/admin/roteiros/passeios', 'admin.roteiros.passeios.listar', 'Admin\\Roteiros\\PasseiosController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('32', '/admin/roteiros/passeios/cadastrar', 'admin.roteiros.passeios.cadastrar', 'Admin\\Roteiros\\PasseiosController@cadastrar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('33', '/admin/roteiros/passeios/cadastrar', 'admin.roteiros.passeios.salvar', 'Admin\\Roteiros\\PasseiosController@salvar', 'post', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('34', '/admin/roteiros/passeios/editar/{id}', 'admin.roteiros.passeios.editar', 'Admin\\Roteiros\\PasseiosController@editar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('35', '/admin/roteiros/passeios/excluir/{id}', 'admin.roteiros.passeios.excluir', 'Admin\\Roteiros\\PasseiosController@excluir', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('36', '/admin/roteiros/apartamentos', 'admin.roteiros.apartamentos.listar', 'Admin\\Roteiros\\ApartamentosController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('37', '/admin/roteiros/apartamentos/cadastrar', 'admin.roteiros.apartamentos.cadastrar', 'Admin\\Roteiros\\ApartamentosController@cadastrar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('38', '/admin/roteiros/apartamentos/cadastrar', 'admin.roteiros.apartamentos.salvar', 'Admin\\Roteiros\\ApartamentosController@salvar', 'post', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('39', '/admin/roteiros/apartamentos/editar/{id}', 'admin.roteiros.apartamentos.editar', 'Admin\\Roteiros\\ApartamentosController@editar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('40', '/admin/roteiros/apartamentos/excluir/{id}', 'admin.roteiros.apartamentos.excluir', 'Admin\\Roteiros\\ApartamentosController@excluir', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('41', '/admin/roteiros/altatemporada', 'admin.roteiros.altatemporada.listar', 'Admin\\Roteiros\\AltaTemporadaController@index', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('42', '/admin/roteiros/altatemporada/cadastrar', 'admin.roteiros.altatemporada.cadastrar', 'Admin\\Roteiros\\AltaTemporadaController@cadastrar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('43', '/admin/roteiros/altatemporada/cadastrar', 'admin.roteiros.altatemporada.salvar', 'Admin\\Roteiros\\AltaTemporadaController@salvar', 'post', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('44', '/admin/roteiros/altatemporada/editar/{id}', 'admin.roteiros.altatemporada.editar', 'Admin\\Roteiros\\AltaTemporadaController@editar', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+INSERT INTO `routes` VALUES ('45', '/admin/roteiros/altatemporada/excluir/{id}', 'admin.roteiros.altatemporada.excluir', 'Admin\\Roteiros\\AltaTemporadaController@excluir', 'get', '1', '2018-05-18 13:42:30', '2018-05-18 13:42:30');
+
+-- ----------------------------
+-- Table structure for teste
+-- ----------------------------
+DROP TABLE IF EXISTS `teste`;
+CREATE TABLE `teste` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `public` tinyint(1) NOT NULL DEFAULT '0',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- ----------------------------
+-- Records of teste
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for users
 -- ----------------------------
 DROP TABLE IF EXISTS `users`;
@@ -485,14 +579,14 @@ CREATE TABLE `users` (
 -- ----------------------------
 -- Records of users
 -- ----------------------------
-INSERT INTO `users` VALUES ('1', 'Clayton Guerini', 'clayton.guerini@gmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', 'j5bBHOpFdj445s29YZlEFtkqL264J1d4eT6z9TwgqUVqKNo73nwsapL78DOg', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
-INSERT INTO `users` VALUES ('2', 'Diego Tavares', 'diegocostatavares@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', 'Q1idMgWn9r1P7fpobhRdXo8PYGV3RKYy6sSFUUePBYoGRY2QaCuql9YR1zuE', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
-INSERT INTO `users` VALUES ('3', 'Visitante 1', 'visitante1@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', null, '2018-04-11 00:55:29', '2018-04-11 00:55:29');
-INSERT INTO `users` VALUES ('4', 'Visitante 2', 'visitante2@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
+INSERT INTO `users` VALUES ('1', 'Clayton Guerini', 'clayton.guerini@gmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '2jGACH8c46Wjt5H9aqLwB2MGzco2iAAYw2ggFvRS7NZDnRudgWmfErafLdfs', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
+INSERT INTO `users` VALUES ('2', 'Diego Tavares', 'diegocostatavares@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', 'QN1nvdNNLrhUcxMGSc3Z5PK2iDpmshUbNRXFhvqPuiQodnqn4l4b9XxKre8O', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
+INSERT INTO `users` VALUES ('3', 'Admin', 'admin@admin.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', 'TA76CJJHS7XXV2RH8YGdQm97gT4oXdWYUk2sT6fiElDvm1ZIBuMSX1uFd0Fx', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
+INSERT INTO `users` VALUES ('4', 'Visitante 2', 'visitante2@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', 'u3641eW9fTxYC0ycRWW5XOw7j49FE0ecPEj4OAezVj6aES36ZBx1ygPohLsn', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
 INSERT INTO `users` VALUES ('5', 'Visitante 3', 'visitante3@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
 INSERT INTO `users` VALUES ('6', 'Visitante 4', 'visitante4@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
 INSERT INTO `users` VALUES ('7', 'Visitante 5', 'visitante5@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
 INSERT INTO `users` VALUES ('8', 'Visitante 6', 'visitante6@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
 INSERT INTO `users` VALUES ('9', 'Visitante 7', 'visitante7@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
 INSERT INTO `users` VALUES ('10', 'Visitante 8', 'visitante8@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
-INSERT INTO `users` VALUES ('11', 'Visitante 9', 'visitante9@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
+INSERT INTO `users` VALUES ('11', 'Visitante 10', 'visitante9@hotmail.com', '$2y$10$kMsVDyesKlkvB8hLZa/ZoOlbvvpimi8MRr3pxuX3HgoCvoPMXjFtW', '', '2018-04-11 00:55:29', '2018-04-11 00:55:29');
