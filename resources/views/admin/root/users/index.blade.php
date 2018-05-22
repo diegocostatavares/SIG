@@ -16,7 +16,6 @@
             <table id="datatable" class="table table-striped table-bordered">
                 <thead>
                     <tr>
-                        <th>ID</th>
                         <th>Nome</th>
                         <th>Grupos</th>
                         <th class="actions">Ações</th>
@@ -28,8 +27,7 @@
 
                     @foreach($users as $user)
                     <tr>
-                        <td>{{ $user->id_user }}</td>
-                        <td>{{ $user->name }}</td>
+                        <td nowrap="nowrap">{{ $user->name }}</td>
 
                         <td>
                         @foreach($user->roles as $roles)
@@ -44,7 +42,7 @@
                         </td>
 
 
-                        <td class="actions" nowrap="nowrap" >
+                        <td class="actions" nowrap="nowrap" align="right">
                             @include('layouts._includes.botoes_crud_listagem')
                         </td>
 
@@ -57,8 +55,6 @@
         </div>
     </div>
 </div>
-
-
 
 
 @endsection
