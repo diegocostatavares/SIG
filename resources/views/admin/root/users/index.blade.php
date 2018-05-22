@@ -34,7 +34,7 @@
 
                     @foreach($users as $user)
                     <tr>
-                        <td nowrap="nowrap">{{ $user->name }}</td>
+                        <td >{{ $user->name }}</td>
 
                         <td>
                         @foreach($user->roles as $roles)

@@ -91,6 +91,13 @@
 
                 <h3 class="text-white">Website em Desenvolvimento</h3>
 
+                <br><br>
+                <p>
+                    <a href="{{ route('admin.dashboard') }}">
+                        <button type="button" class="btn btn-primary btn-lg">ENTRAR</button>
+                    </a>
+                </p>
+
             </div>
 
 

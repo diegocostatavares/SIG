@@ -44,14 +44,34 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Webserver/www/GitHub/SIG"
+		"/C/Webserver/www/GitHub/SIG",
+		"/C/Webserver/www/GitHub/SIG/app",
+		"/C/Webserver/www/GitHub/SIG/resources",
+		"/C/Webserver/www/GitHub/SIG/resources/views",
+		"/C/Webserver/www/GitHub/SIG/resources/views/admin",
+		"/C/Webserver/www/GitHub/SIG/resources/views/admin/root",
+		"/C/Webserver/www/GitHub/SIG/resources/views/admin/root/users",
+		"/C/Webserver/www/GitHub/SIG/resources/views/layouts",
+		"/C/Webserver/www/GitHub/SIG/resources/views/layouts/_includes",
+		"/C/Webserver/www/GitHub/SIG/resources/views/site"
 	],
 	"file_history":
 	[
+		"/C/Webserver/www/GitHub/SIG/resources/views/maintenance.blade.php",
+		"/C/Webserver/www/GitHub/SIG/resources/views/admin/root/users/index.blade.php",
+		"/C/Webserver/www/GitHub/SIG/app/Http/Controllers/Admin/Root/UsersController.php",
+		"/C/Webserver/www/GitHub/SIG/resources/views/layouts/_includes/botoes_crud_listagem.blade.php",
+		"/C/Webserver/www/GitHub/SIG/resources/views/layouts/_includes/topbar.blade.php",
+		"/C/Webserver/www/GitHub/SIG/public/assets/js/jquery.app.js",
+		"/C/Webserver/www/GitHub/SIG/.env",
+		"/C/Webserver/www/LARAVEL/aprendendo1/resources/views/templateDefault.blade.php",
+		"/C/Webserver/www/LARAVEL/aprendendo1/resources/views/layouts/app.blade.php",
+		"/C/Webserver/www/LARAVEL/aprendendo1/resources/views/home.blade.php",
+		"/C/Webserver/www/LARAVEL/aprendendo1/resources/views/welcome.blade.php"
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 41.0
 	},
 	"find_in_files":
 	{
@@ -65,6 +85,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"xs"
 		],
 		"highlight": true,
 		"in_selection": false,
