@@ -32,4 +32,14 @@ class User extends Authenticatable
         }
         return !! $role->intersect($this->roles)->count();
     }
+
+    public function isRoot()
+    {
+        return ($this->hasRole('root')) ? true : false;
+    }
+
+    public function isAdmin()
+    {
+        return ($this->hasRole('admin')) ? true : false;
+    }
 }

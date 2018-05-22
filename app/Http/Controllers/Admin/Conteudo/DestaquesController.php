@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Conteudo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Destaques;
-use App\Canais;
+use App\Models\Destaques;
+use App\Models\Canais;
 
 class DestaquesController extends Controller {
 

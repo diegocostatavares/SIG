@@ -9,11 +9,7 @@
         <div class="card-box table-responsive">
             <p>
                 <div class="row">
-                    <a href="{{ route('admin.root.usuarios.cadastrar') }}">
-                        <button type="button" class="btn btn-success waves-effect waves-light">
-                            <span class="btn-label"><i class="zmdi zmdi-plus"></i></span>Adicionar
-                        </button>
-                    </a>
+                    @include('layouts._includes.botoes_cad_listagem')
                 </div>
             </p>
 
@@ -23,7 +19,6 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Grupos</th>
-                        <th>Permissões</th>
                         <th class="actions">Ações</th>
                     </tr>
                 </thead>
@@ -48,66 +43,9 @@
                         @endforeach
                         </td>
 
-                        <td>
 
-                        @if ($user->hasRole('root'))
-
-                            Todas
-
-                        @elseif ($user->hasRole('admin'))
-
-                            Todas (-root)
-
-                        @else 
-
-                            @foreach($user->roles as $roles)
-
-                                @foreach($roles->permissions as $permissions)
-
-                                    @if (!$loop->first)
-                                     | 
-                                    @endif
-
-                                    {{ $permissions->label }}
-
-                                @endforeach
-
-                            @endforeach
-
-                        @endif
-
-
-                        </td>
-
-                        <td class="actions" nowrap="nowrap">
-                            <center>
-
-                                @can('auth_permission', 'admin.root.usuarios.visualizar')
-                                <a href="{{ route('admin.root.usuarios.editar',$user->id_user)}}">
-                                    <button type="button" class="btn btn-info waves-effect waves-light btn-sm">
-                                        <span class="btn-label"><i class="zmdi zmdi-edit"></i></span>Editar
-                                    </button>
-                                </a>
-                                @endcan 
-
-                                @can('auth_permission', 'admin.root.usuarios.editar')
-                                <a href="{{ route('admin.root.usuarios.editar',$user->id_user)}}">
-                                    <button type="button" class="btn btn-info waves-effect waves-light btn-sm">
-                                        <span class="btn-label"><i class="zmdi zmdi-edit"></i></span>Editar
-                                    </button>
-                                </a>
-                                @endcan
-
-                                @can('auth_permission', 'admin.root.usuarios.excluir')
-                                <a href="{{ route('admin.root.usuarios.excluir',$user->id_user) }}">
-                                    <button type="button" class="btn btn-danger waves-effect waves-light btn-sm" id="danger-alert">
-                                        <span class="btn-label"><i class="zmdi zmdi-delete"></i></span>Excluir
-                                    </button>
-                                </a>
-                                @endcan
-
-                            </center>
-
+                        <td class="actions" nowrap="nowrap" >
+                            @include('layouts._includes.botoes_crud_listagem')
                         </td>
 
                     </tr>
@@ -116,7 +54,9 @@
                 </tbody>
             </table>
 
-        </div></div></div>
+        </div>
+    </div>
+</div>
 
 
 

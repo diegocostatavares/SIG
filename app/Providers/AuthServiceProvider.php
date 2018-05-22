@@ -23,6 +23,7 @@ class AuthServiceProvider extends ServiceProvider
             
             return new CachingUserProvider(
 
+                //https://matthewdaly.co.uk/blog/2018/01/12/creating-a-caching-user-provider-for-laravel/
                 $app->make('Illuminate\Contracts\Hashing\Hasher'),
                 $config['model'],
                 $app->make('Illuminate\Contracts\Cache\Repository')
@@ -37,7 +38,7 @@ class AuthServiceProvider extends ServiceProvider
         //=============================================================
         Gate::before(function ($user, $ability) {
 
-            if(Auth::user()->roles->contains('name','root')) {
+            if(Auth::user()->isRoot()) {
 
                 return true;
             }

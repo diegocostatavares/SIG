@@ -16,6 +16,6 @@ class ClearUserId
 
     public function handle(UserAmended $event)
     {
-        $this->cache->forget('user_by_id_'.$event->model->id);
+        $this->cache->pull('user_by_id_'.$event->model->id_user);
     }
 }

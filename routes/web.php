@@ -1,5 +1,6 @@
 <?php
 use App\Models\System\Routes;
+use Illuminate\Support\Facades\Cache;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,13 +16,13 @@ use App\Models\System\Routes;
 Auth::routes();
 
 
-if (!Cache::has('routes')) {
+if (!Cache::has('sys_routes')) {
 
     $vet_routes = Routes::all();
-    Cache::put('routes', $vet_routes, 60);
+    Cache::put('sys_routes', $vet_routes, 60);
 }
 
-$vet_routes = Cache::get('routes');
+$vet_routes = Cache::get('sys_routes');
 
 $vet_routes_auth[0] = $vet_routes->filter(function ($value, $key) {
     return $value->auth == 0;
@@ -41,12 +42,12 @@ foreach ($vet_routes_auth[0]->all() as $k_rota => $v_rota) {
     switch (strtolower($v_rota['method'])) {
 
         case 'post':
-            Route::post($v_rota['link'], ['as'=>$v_rota['alias'], 'uses'=>$v_rota['uses']]);
+            Route::post($v_rota['link'], ['as'=>$v_rota['name'], 'uses'=>$v_rota['controller'].'@'.$v_rota['action']]);
             break;
         
         case 'get':
         default:
-            Route::get($v_rota['link'], ['as'=>$v_rota['alias'], 'uses'=>$v_rota['uses']]);
+            Route::get($v_rota['link'], ['as'=>$v_rota['name'], 'uses'=>$v_rota['controller'].'@'.$v_rota['action']]);
             break;
     }
 }
@@ -62,12 +63,12 @@ Route::middleware(['auth', 'can:auth_permission'])->group(function () use($vet_r
         switch (strtolower($v_rota['method'])) {
 
             case 'post':
-                Route::post($v_rota['link'], ['as'=>$v_rota['alias'], 'uses'=>$v_rota['uses']]);
+                Route::post($v_rota['link'], ['as'=>$v_rota['name'], 'uses'=>$v_rota['controller'].'@'.$v_rota['action']]);
                 break;
             
             case 'get':
             default:
-                Route::get($v_rota['link'], ['as'=>$v_rota['alias'], 'uses'=>$v_rota['uses']]);
+                Route::get($v_rota['link'], ['as'=>$v_rota['name'], 'uses'=>$v_rota['controller'].'@'.$v_rota['action']]);
                 break;
         }
     }

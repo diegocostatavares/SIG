@@ -1,2 +1,2 @@
 # SIG
-SIG
+Projeto SIG

@@ -48,11 +48,17 @@
             </ul>
             <ul>
                 <li class="text-muted menu-title">Configurações</li>
-                
+
                 <li class="has_sub">
-                    <a href="{{route('admin.root.usuarios')}}" class="waves-effect"><i class="zmdi zmdi-assignment-account"></i>
-                        <span>Usuários </span> <span class="menu-arrow"></span></a>
+                    <a href="javascript:void(0);" class="waves-effect"><i class="zmdi zmdi-assignment-account"></i>
+                        <span> Configurações </span> <span class="menu-arrow"></span></a>
+                    <ul class="list-unstyled">
+                        <li><a href="{{route('admin.root')}}">ROOT</a></li>
+                        <li><a href="{{route('admin.root.usuarios')}}">Usuários</a></li>
+                    </ul>
                 </li>
+
+
             </ul>
             <div class="clearfix"></div>
         </div>
