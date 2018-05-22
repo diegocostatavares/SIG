@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Conteudo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Canais;
+use App\Models\Canais;
 
 class CanaisController extends Controller {
 

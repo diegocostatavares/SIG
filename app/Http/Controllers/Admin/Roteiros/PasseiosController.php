@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin\Roteiros;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Passeios;
-use App\PasseiosCategorias;
+use App\Models\Passeios;
+use App\Models\PasseiosCategorias;
 
 class PasseiosController extends Controller
 {

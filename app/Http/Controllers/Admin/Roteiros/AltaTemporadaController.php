@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin\roteiros;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\AltaTemporada;
+use App\Models\AltaTemporada;
 
 class AltaTemporadaController extends Controller
 {

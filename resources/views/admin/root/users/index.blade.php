@@ -33,7 +33,7 @@
 
                     @foreach($users as $user)
                     <tr>
-                        <td>{{ $user->id }}</td>
+                        <td>{{ $user->id_user }}</td>
                         <td>{{ $user->name }}</td>
 
                         <td>
@@ -81,17 +81,31 @@
 
                         <td class="actions" nowrap="nowrap">
                             <center>
-                                <a href="{{ route('admin.root.usuarios.editar',$user->id)}}">
+
+                                @can('auth_permission', 'admin.root.usuarios.visualizar')
+                                <a href="{{ route('admin.root.usuarios.editar',$user->id_user)}}">
                                     <button type="button" class="btn btn-info waves-effect waves-light btn-sm">
                                         <span class="btn-label"><i class="zmdi zmdi-edit"></i></span>Editar
                                     </button>
                                 </a>
+                                @endcan 
 
-                                <a href="{{ route('admin.root.usuarios.excluir',$user->id) }}">
+                                @can('auth_permission', 'admin.root.usuarios.editar')
+                                <a href="{{ route('admin.root.usuarios.editar',$user->id_user)}}">
+                                    <button type="button" class="btn btn-info waves-effect waves-light btn-sm">
+                                        <span class="btn-label"><i class="zmdi zmdi-edit"></i></span>Editar
+                                    </button>
+                                </a>
+                                @endcan
+
+                                @can('auth_permission', 'admin.root.usuarios.excluir')
+                                <a href="{{ route('admin.root.usuarios.excluir',$user->id_user) }}">
                                     <button type="button" class="btn btn-danger waves-effect waves-light btn-sm" id="danger-alert">
                                         <span class="btn-label"><i class="zmdi zmdi-delete"></i></span>Excluir
                                     </button>
                                 </a>
+                                @endcan
+
                             </center>
 
                         </td>

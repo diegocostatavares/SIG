@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Roteiros;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Apartamentos;
+use App\Models\Apartamentos;
 
 class ApartamentosController extends Controller
 {

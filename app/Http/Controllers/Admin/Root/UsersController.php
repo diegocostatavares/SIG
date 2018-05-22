@@ -4,7 +4,7 @@ namespace App\Http\Controllers\admin\root;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\User;
+use App\Models\System\User;
 
 class UsersController extends Controller
 {
@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index()
     {
         //$users = User::with('roles.permissions')->orderBy('id', 'ASC')->paginate(5);
-        $users = User::with('roles.permissions')->orderBy('id', 'ASC')->get();
+        $users = User::with('roles.permissions')->orderBy('id_user', 'ASC')->get();
 
         return view('admin.root.users.index', compact('users'));
     }

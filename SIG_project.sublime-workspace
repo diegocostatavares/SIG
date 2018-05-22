@@ -391,6 +391,33 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "routes/web.php",
+			"settings":
+			{
+				"buffer_size": 2067,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/Providers/AuthServiceProvider.php",
+			"settings":
+			{
+				"buffer_size": 2693,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "app/User.php",
+			"settings":
+			{
+				"buffer_size": 1134,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -431,24 +458,29 @@
 		"/C/Webserver/www/GitHub/SIG",
 		"/C/Webserver/www/GitHub/SIG/app",
 		"/C/Webserver/www/GitHub/SIG/app/Classes",
-		"/C/Webserver/www/GitHub/SIG/storage",
-		"/C/Webserver/www/GitHub/SIG/storage/framework",
-		"/C/Webserver/www/GitHub/SIG/storage/framework/cache",
-		"/C/Webserver/www/GitHub/SIG/storage/framework/cache/data",
-		"/C/Webserver/www/GitHub/SIG/storage/framework/cache/data/9e",
-		"/C/Webserver/www/GitHub/SIG/storage/framework/cache/data/9e/2c"
+		"/C/Webserver/www/GitHub/SIG/app/Http",
+		"/C/Webserver/www/GitHub/SIG/app/Http/Controllers",
+		"/C/Webserver/www/GitHub/SIG/app/Http/Middleware",
+		"/C/Webserver/www/GitHub/SIG/app/Providers",
+		"/C/Webserver/www/GitHub/SIG/config",
+		"/C/Webserver/www/GitHub/SIG/routes"
 	],
 	"file_history":
 	[
+		"/C/Webserver/www/- WORDPRESS/wordpress/wp-config.php",
+		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Auth/Authenticatable.php",
+		"/C/Webserver/www/GitHub/SIG/routes/api.php",
+		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Session/Middleware/AuthenticateSession.php",
+		"/C/Webserver/www/GitHub/SIG/app/Http/Kernel.php",
+		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Auth/RequestGuard.php",
+		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Support/Facades/Auth.php",
 		"/C/Webserver/www/GitHub/SIG/app/User.php",
 		"/C/Webserver/www/GitHub/SIG/storage/framework/cache/data/9e/2c/9e2c05b0ce117ad468d9a4e577e7ae96c67e4bb4",
 		"/C/Webserver/www/GitHub/SIG/app/Providers/AuthServiceProvider.php",
 		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Contracts/Auth/Authenticatable.php",
-		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Auth/Authenticatable.php",
 		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Auth/Access/Gate.php",
 		"/C/Webserver/www/GitHub/SIG/vendor/composer/autoload_real.php",
 		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Foundation/Support/Providers/AuthServiceProvider.php",
-		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Support/Facades/Auth.php",
 		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authorize.php",
 		"/C/Webserver/www/GitHub/SIG/vendor/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php",
 		"/C/Webserver/www/GitHub/SIG/routes/web.php",
@@ -562,16 +594,11 @@
 		"/C/Webserver/www/SIGO_INTEGRADO_3/SIGO_CONORTE/sigo_oem/COM_PESSOAL_SKILLS/includes/controladores/inc_diario.php",
 		"/C/Webserver/www/SIGO_INTEGRADO_3/SIGO_CONORTE/sigo_oem/COM_PESSOAL_SKILLS/includes/controladores/inc_diario_painel_geral.php",
 		"/C/Webserver/www/SIGO_INTEGRADO_3/SIGO_CONORTE/sigo_administrativo/LOCACAO_EQP/includes/home/inc_cadastro.php",
-		"/C/Webserver/www/SIGO_INTEGRADO_3/SIGO_CONORTE/sigo_phalcon/public/assets/js/tup/cadastro.micro.app.js",
-		"/C/Webserver/www/SIGO_INTEGRADO_3/SIGO_CONORTE/sigo_phalcon/public/assets/js/indicadores.app.js",
-		"/C/Webserver/www/SIGO_INTEGRADO_3/SIGO_CONORTE/sigo_phalcon/public/assets/js/frontend.app.js",
-		"/C/Webserver/www/LARAVEL/aprendendo1/composer.json",
-		"/C/Webserver/www/ColetadorWEB/VOICER/voicer.php",
-		"/C/Webserver/www/SIGO_INTEGRADO_3/SIGO_CONORTE/sigo_oem/COM_PESSOAL_SKILLS/includes/max3/gera_select.php"
+		"/C/Webserver/www/SIGO_INTEGRADO_3/SIGO_CONORTE/sigo_phalcon/public/assets/js/tup/cadastro.micro.app.js"
 	],
 	"find":
 	{
-		"height": 41.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
@@ -730,8 +757,99 @@
 	"groups":
 	[
 		{
+			"selected": 2,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "routes/web.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2067,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								774,
+								774
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "app/Providers/AuthServiceProvider.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2693,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								656,
+								624
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "app/User.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1134,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								283,
+								291
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

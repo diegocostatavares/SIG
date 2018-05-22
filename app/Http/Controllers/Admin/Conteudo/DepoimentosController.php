@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin\Conteudo;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Depoimentos;
+use App\Models\Depoimentos;
 
 class DepoimentosController extends Controller
 {
     public function index() {
 
-        $linhas = \App\Depoimentos::all();
+        $linhas = Depoimentos::all();
         //dd($retorno);
         return view('admin.conteudo.depoimentos', compact('linhas'));
     }

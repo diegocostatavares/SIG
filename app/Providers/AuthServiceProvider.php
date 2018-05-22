@@ -1,40 +1,34 @@
 <?php
-
 namespace App\Providers;
 
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Cache;
-use App\Permission;
-use App\User;
-use View;
-//use Schema;
+use App\Auth\CachingUserProvider;
+use Illuminate\Support\Facades\Auth;
 
 class AuthServiceProvider extends ServiceProvider
 {
-    /**
-     * The policy mappings for the application.
-     *
-     * @var array
-     */
     protected $policies = [
-        // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
-    /**
-     * Register any authentication / authorization services.
-     *
-     * @return void
-     */
     public function boot()
     {
-
-        //=============================================================
-        // REGISTRANDO POLITICAS
-        //=============================================================
-
         $this->registerPolicies();
+
+        //=============================================================
+        // REGISTRA E MONTA CACHE AUTH - USUARIO LOGADO
+        //=============================================================
+        Auth::provider('caching', function ($app, array $config) {
+            
+            return new CachingUserProvider(
+
+                $app->make('Illuminate\Contracts\Hashing\Hasher'),
+                $config['model'],
+                $app->make('Illuminate\Contracts\Cache\Repository')
+            );
+        });
+
 
 
         //=============================================================
@@ -43,56 +37,58 @@ class AuthServiceProvider extends ServiceProvider
         //=============================================================
         Gate::before(function ($user, $ability) {
 
-            if($user->roles->contains('name','root')) {
+            if(Auth::user()->roles->contains('name','root')) {
 
                 return true;
             }
         }); 
-        
 
         //=============================================================
         // VALIDA PERMISSOES DE USUARIO LOGADO
         //=============================================================
-        Gate::define('auth', function ($user, $alias=NULL) {
+        Gate::define('auth_permission', function ($user, $alias=NULL) {
 
-            $vet_permission_name = [];
-
-            foreach ($user->roles as $k_roles => $v_roles) {
-
-                foreach ($v_roles->permissions as $permission) {
-
-                        $vet_permission_name[] = $permission->name;
-                }
-            }
-
+            $vet_permission_name = $this->getPermissions_array();
 
             if ($alias==NULL) {
-                
+
                 $action = Route::current()->getAction();
 
+                
                 if (!isset($action['as'])) {
-                    
-                    abort(403, 'Acesso não Autorizado!');
+
                     return false;
                 }
                 else{
 
                     $alias = $action['as'];
                 }
-
-                if (in_array($alias, $vet_permission_name)) {
-
-                    return true;
-                }
-
-                // $msg  = "Ops... ". strtoupper($user->name) .", acesso nao autorizado nessa rota: " . $alias . "." ;
-                // $msg .= " Seu perfil é: \n" . implode("\n", $vet_permission_name);
-                // View::share('msg', $msg);
-                abort(403, 'Acesso não Autorizado!');
-                return false;
-
             }
+
+
+            if (in_array($alias, $vet_permission_name)) {
+
+                return true;
+            }
+
+            return false;
+            
         });
     }
 
+
+    public function getPermissions_array()
+    {
+        $return = [];
+
+        foreach (Auth::user()->roles as $k_roles => $v_roles) {
+
+            foreach ($v_roles->permissions as $permission) {
+
+                $return[] = $permission->name;
+            }
+        }
+
+        return $return;
+    }
 }

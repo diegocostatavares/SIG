@@ -1,5 +1,5 @@
 <?php
-use App\Routes;
+use App\Models\System\Routes;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ foreach ($vet_routes_auth[0]->all() as $k_rota => $v_rota) {
 // PROTEGIDOS COM AUTENTICACAO E AUTORIZACAO
 //=============================================================
 
-Route::middleware(['auth', 'can:auth'])->group(function () use($vet_routes_auth) {
+Route::middleware(['auth', 'can:auth_permission'])->group(function () use($vet_routes_auth) {
 
     foreach ($vet_routes_auth[1]->all() as $k_rota => $v_rota) {
 
