@@ -1,8 +1,15 @@
 @extends('layouts.site')
 
 @section('titulo','Usuários')
+
 @section('conteudo')
-{{ Session::get('message') }}
+
+@if (session('msg'))
+    <div class="alert alert-info">
+        <strong>{{ session('msg') }}</strong>
+    </div>
+@endif
+
 <h4 class="page-title"><b>USUÁRIOS</b></h4>
 <div class="row">
     <div class="col-sm-12">
