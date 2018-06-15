@@ -103,6 +103,17 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
+        'roles' => [
+            'required' => 'O campo GRUPOS é obrigatório.!',
+        ],
+        'password' => [
+            'required' => 'O campo SENHA é obrigatório.!',
+            'same' => 'Senhas não correspondem. Devem ser iguais.',
+        ],
+        'password-confirm' => [
+            'required' => 'O campo SENHA é obrigatório.!',
+            'same' => 'Senhas não correspondem. Devem ser iguais.',
+        ],
     ],
 
     /*

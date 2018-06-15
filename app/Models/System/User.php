@@ -13,6 +13,14 @@ class User extends Authenticatable
 
     use Notifiable;
     
+    protected $fillable = [
+        'id_user', 'name', 'email', 'password', 'ativo'
+    ];
+
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
     protected $dispatchesEvents = [
         'saved' => UserAmended::class,
         'deleted' => UserAmended::class,
@@ -22,7 +30,7 @@ class User extends Authenticatable
     public function roles()
     {
         //return $this->belongsToMany(Role::class);
-        return $this->belongsToMany('App\Models\System\Role', 'sys_role_user', 'user_id', 'role_id');
+        return $this->belongsToMany('App\Models\System\Role', 'sys_role_user', 'id_user', 'id_role');
     }
 
     public function hasRole($role)
@@ -41,5 +49,21 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return ($this->hasRole('admin')) ? true : false;
+    }
+
+    public function isRootOrAdmin()
+    {
+        if ($this->hasRole('root')) {
+
+            return true;
+        }
+        elseif ($this->hasRole('admin')) {
+
+            return true;
+        }
+        else{
+            
+            return false;
+        }
     }
 }

@@ -5,49 +5,102 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 
+use Illuminate\Auth\AuthenticationException;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
+
+use Illuminate\Support\Facades\Route;
+
 class Handler extends ExceptionHandler
 {
-    /**
-     * A list of the exception types that are not reported.
-     *
-     * @var array
-     */
+
     protected $dontReport = [
-        //
     ];
 
-    /**
-     * A list of the inputs that are never flashed for validation exceptions.
-     *
-     * @var array
-     */
     protected $dontFlash = [
         'password',
         'password_confirmation',
     ];
 
-    /**
-     * Report or log an exception.
-     *
-     * This is a great spot to send exceptions to Sentry, Bugsnag, etc.
-     *
-     * @param  \Exception  $exception
-     * @return void
-     */
     public function report(Exception $exception)
     {
         parent::report($exception);
     }
 
-    /**
-     * Render an exception into an HTTP response.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
-     */
     public function render($request, Exception $exception)
     {
-        return parent::render($request, $exception);
+
+        if (config('app.debug')) {
+            
+            return parent::render($request, $exception);
+        }
+
+        if($this->isHttpException($exception)) {
+
+            $code = $exception->getStatusCode();
+
+            switch ($code) {
+
+                case 403:
+                    return Route::respondWithRoute('sys_error_403');
+                    break;
+
+                case 404:
+                    return Route::respondWithRoute('sys_error_404');
+                    break;
+
+                case 500:
+                    return Route::respondWithRoute('sys_error_500');
+                    break;
+
+                default:
+                    return Route::respondWithRoute('sys_error_default');
+                    break;
+            }
+        }
+
+        if ($exception instanceof HttpResponseException) {
+
+            return Route::respondWithRoute('sys_error_500');
+
+        } elseif ($exception instanceof NotFoundHttpException) {
+
+            return Route::respondWithRoute('sys_error_404');
+
+        } elseif ($exception instanceof ModelNotFoundException) {
+
+            return Route::respondWithRoute('sys_error_500');
+
+        } elseif ($exception instanceof AuthenticationException) {
+
+            //return Route::respondWithRoute('sys_error_500');
+
+    //     if ($request->expectsJson()) {
+    //         return response()->json(['error' => 'Unauthenticated.'], 401);
+    //     }
+
+            return $this->unauthenticated($request, $exception);
+
+        } elseif ($exception instanceof AuthorizationException) {
+
+            return Route::respondWithRoute('sys_error_403');
+
+        // } elseif ($exception instanceof ValidationException && $exception->getResponse()) {
+
+        //     echo 'ValidationException<hr>'; dd($exception);
+        //     return $exception->getResponse();
+
+        } elseif ($exception instanceof AccessDeniedHttpException && $exception->getResponse()) {
+
+            return Route::respondWithRoute('sys_error_403');
+        }
+
+        return Route::respondWithRoute('sys_error_default');
+
     }
+
 }

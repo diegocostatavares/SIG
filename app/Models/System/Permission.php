@@ -7,12 +7,16 @@ class Permission extends Model
 {
 
 	protected $table = "sys_permissions";
-	protected $primaryKey = "id";
+	protected $primaryKey = "id_permission";
 
-    public function roles()
+    protected $fillable = [
+        'id_permission', 'name', 'label'
+    ];
+
+    public function roles() 
     {
         //return $this->belongsToMany(Role::class);
-        return $this->belongsToMany('App\Models\System\Role', 'sys_role_user', 'user_id', 'role_id');
+        return $this->belongsToMany('App\Models\System\Role', 'sys_role_user', 'id_user', 'id_role');
     }
     
 }

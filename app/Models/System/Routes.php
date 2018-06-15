@@ -7,6 +7,6 @@ class Routes extends Model
 {
     
     protected $table = "sys_routes";
-    protected $primaryKey = "id";
+    protected $primaryKey = "id_route";
 
 }
