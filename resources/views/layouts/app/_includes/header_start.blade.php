@@ -19,3 +19,8 @@
     <!-- Notification css (Toastr) -->
     <link href="{{asset('assets/app/plugins/toastr/toastr.min.css')}}" rel="stylesheet" type="text/css"/>
 
+    <!-- Custom box css -->
+    <link href="{{asset('assets/app/plugins/custombox-4.0.3/dist/custombox.min.css')}}" rel="stylesheet">
+
+    <!-- Sweet Alert css -->
+    <link href="{{asset('assets/app/plugins/bootstrap-sweetalert/sweet-alert.css')}}" rel="stylesheet" type="text/css"/>

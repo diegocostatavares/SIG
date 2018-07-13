@@ -14,6 +14,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 use Illuminate\Support\Facades\Route;
+use \Log;
 
 class Handler extends ExceptionHandler
 {
@@ -38,6 +39,16 @@ class Handler extends ExceptionHandler
             
             return parent::render($request, $exception);
         }
+
+        $cod_error = rand(123123,1231231231231);
+
+        $fullUrl = \Request::fullUrl();
+
+        //Log::channel('erros_com_codigo')->error($cod_error . PHP_EOL . $fullUrl . PHP_EOL);
+
+        Log::channel('erros_com_codigo')->error($cod_error . PHP_EOL . $fullUrl . PHP_EOL . $exception->getMessage() . PHP_EOL . $exception->getTraceAsString() . PHP_EOL . '---------------------------------' . PHP_EOL);
+        \Session::flash('warning', "Erro no servidor. Cod. " . $cod_error); 
+
 
         if($this->isHttpException($exception)) {
 

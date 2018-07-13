@@ -47,6 +47,10 @@
             <!-- end row -->
 
 
+            <!-- Modal -->
+            <div id="custom-modal" class="custom-modal">
+            </div>
+
         </div> <!-- container -->
 
     </div> <!-- content -->
@@ -55,7 +59,6 @@
 
 </div>
 <!-- End content-page -->
-
 
 <!-- ============================================================== -->
 <!-- End Right content here -->

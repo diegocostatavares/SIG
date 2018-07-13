@@ -60,9 +60,23 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 // ROTAS TROCAR MINHA SENHA - USUARIO LOGADO - AUTENTICADO
 Route::middleware(['auth'])->group(function ()
 {
-    Route::get('trocasenha', 'Admin\Usuarios\IndexController@view_trocasenha_user_atual')->name('trocasenha');
-    Route::post('trocasenha', 'Admin\Usuarios\IndexController@salva_trocasenha_user_atual')->name('salvatrocasenha');
-    Route::get('perfil', 'Admin\Usuarios\IndexController@view_meuPerfil')->name('perfil');
+    Route::get('trocasenha', 'Admin\UsuariosController@view_trocasenha_user_atual')->name('trocasenha');
+    Route::post('trocasenha', 'Admin\UsuariosController@salva_trocasenha_user_atual')->name('salvatrocasenha');
+    Route::get('perfil', 'Admin\UsuariosController@view_meuPerfil')->name('perfil');
+});
+
+
+// ROTA - AJAX - USUARIO LOGADO - AUTENTICADO
+Route::middleware(['auth'])->group(function ()
+{
+    Route::get('ajax/{module}/{action}', function($module, $action) {
+
+        return App::call('App\\Http\\Controllers\\'.$module.'\\AjaxController@'.$action);
+    });
+    Route::post('ajax/{module}/{action}', function($module, $action) {
+
+        return App::call('App\\Http\\Controllers\\'.$module.'\\AjaxController@'.$action);
+    });
 });
 
 //=============================================================

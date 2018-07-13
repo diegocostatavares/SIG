@@ -24520,3 +24520,15 @@ div.hopscotch-bubble .hopscotch-bubble-arrow-container.down .hopscotch-bubble-ar
   text-shadow: rgba(255, 255, 255, 0.3) 5px 1px, rgba(255, 255, 255, 0.2) 12px 3px, rgba(255, 255, 255, 0.1) 6px 4px;
 }
 /*# sourceMappingURL=style.css.map */
+
+.body-overflow-hidden {
+  overflow: hidden; 
+}
+
+  /* Custom-modal */
+  .custom-modal {
+      background-color: #ffffff;
+      width: 1100px;
+      border-radius: 4px;
+      display: none;
+    }

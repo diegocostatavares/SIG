@@ -131,6 +131,7 @@
 
 <!-- jQuery  -->
 <script src="{{asset('assets/app/js/jquery.min.js')}}"></script>
+<script src="{{asset('assets/app/js/jquery-ui.min.js')}}"></script>
 <script src="{{asset('assets/app/js/popper.min.js')}}"></script><!-- Popper for Bootstrap -->
 <script src="{{asset('assets/app/js/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/app/js/detect.js')}}"></script>
@@ -153,9 +154,19 @@
 <!-- Peity chart js -->
 <script src="{{asset('assets/app/plugins/peity/jquery.peity.min.js')}}"></script>
 
+<!-- animsition.js -->
+<!-- <script src="{{asset('assets/app/plugins/animsition/js/animsition.min.js')}}"></script> -->
+
 <!-- App js -->
 <script src="{{asset('assets/app/js/jquery.core.js')}}"></script>
-<script src="{{asset('assets/app/js/jquery.app.js')}}"></script>
+<script src="{{asset('assets/app/js/jquery.app.js?2')}}"></script>
 
 <!-- Toastr js -->
 <script src="{{asset('assets/app/plugins/toastr/toastr.min.js')}}"></script>
+
+<!-- Modal-Effect -->
+<script src="{{asset('assets/app/plugins/custombox-4.0.3/dist/custombox.min.js')}}"></script>
+<script src="{{asset('assets/app/plugins/custombox-4.0.3/dist/legacy.min.js')}}"></script>
+
+<!-- Sweet Alert js -->
+<script src="{{asset('assets/app/plugins/bootstrap-sweetalert/sweet-alert.min.js')}}"></script>

@@ -40,74 +40,27 @@ class AuthServiceProvider extends ServiceProvider
         //=============================================================
         Gate::before(function ($user, $ability) {
 
-
 /*
-            print '<pre>';
-
             $route_action_vet = Route::current()->getAction();
 
+            $getActionNamespace = Route::current()->getAction()['namespace'];
 
-            $route_namespace = $route_action_vet['namespace'];
-            $route_namespace_controller_action = $route_action_vet['controller'];
-            $route_namespace_controller_action_vet = explode('@', $route_namespace_controller_action, 2);
+            $controllerFull = $route_action_vet['controller'];
 
-            $route_controller = explode('/', str_replace('\\', '/', head($route_namespace_controller_action_vet)), 2);
+            $controllerNameAndAction = class_basename($controllerFull);
+            list($controllerName, $actionName) = explode('@', $controllerNameAndAction);
 
-            $route_action = last($route_namespace_controller_action_vet);
+            $subModulos = str_replace($getActionNamespace, '', str_replace($controllerNameAndAction, '', $controllerFull));
+            $subModulos = explode('\\', $subModulos);
+            $subModulos = array_filter($subModulos);
 
+            $getModule = head($subModulos);
+            $subModulos = array_values($subModulos);
+            unset($subModulos[0]);
 
-            dd($route_action_vet); 
-            exit();
-
-
-            print 'namespace '; var_dump( $route_action_vet['namespace'] ); print '<hr>';
-            print 'controller '; var_dump( $route_action_vet['controller'] ); print '<hr>';
-
-            $aaa = explode('@', $route_action_vet['controller'], 2);
-            print 'aaa '; var_dump( $aaa ); print '<hr>';
-
-
-            $pastas = str_replace($route_action_vet['namespace'].'\\', '', $route_action_vet['controller']);
-            print 'pastas '; var_dump( $pastas ); print '<hr>';
-
-            exit();
-
-
-            $routeArray = Str::parseCallback(Route::currentRouteAction(), null);
-
-
-            $controller = str_replace('Controller', '', class_basename(head($routeArray)));
-            print 'controller '; var_dump( $controller ); print '<hr>';
-            
-            //dd (class_basename(head($routeArray)));
-
-            var_dump( Route::currentRouteAction() );
-            print '<hr>';
-
-            var_dump( $routeArray );
-            print '<hr>';
-
-            if (last($routeArray) != null) {
-                
-
-                $controller = str_replace('Controller', '', class_basename(head($routeArray)));
-                print 'controller '; var_dump( $controller );
-                print '<hr>';
-
-                $action = head($routeArray);
-                print 'caminho + controller '; var_dump( $action );
-                print '<hr>';
-                
-                $action = last($routeArray);
-                print 'action '; var_dump( $action );
-                print '<hr>';
-
-                var_dump(  Str::slug($controller . '-' . $action) );
-
-            }
-
-            dd( '<hr>' );
+            dd($subModulos);
 */
+            
             if(Auth::user()->isRoot()) {
                 return true;
             }
@@ -144,11 +97,7 @@ class AuthServiceProvider extends ServiceProvider
             }
             else{
 
-                if (in_array( $alias, ['home'] )) {
-                    return true;
-                }
-
-                if (in_array( $alias, ['template'] )) {
+                if (in_array( $alias, ['home','template'] )) {
                     return true;
                 }
 

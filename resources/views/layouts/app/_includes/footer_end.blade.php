@@ -8,6 +8,29 @@
 
     $(document).ready(function() {
 
+        // $(".animsition").animsition({
+        //   inClass: 'fade-in',
+        //   outClass: 'fade-out',
+        //   inDuration: 1500,
+        //   outDuration: 800,
+        //   linkElement: '.animsition-link', 
+        //   // e.g. linkElement: 'a:not([target="_blank"]):not([href^="#"])'
+        //   loading: true,
+        //   loadingParentElement: 'body', //animsition wrapper element
+        //   loadingClass: 'animsition-loading',
+        //   loadingInner: '', // e.g '<img src="loading.svg" />'
+        //   timeout: false,
+        //   timeoutCountdown: 5000,
+        //   onLoadEvent: true,
+        //   browser: [ 'animation-duration', '-webkit-animation-duration'],
+        //   // "browser" option allows you to disable the "animsition" in case the css property in the array is not supported by your browser.
+        //   // The default setting is to disable the "animsition" in a browser that does not support "animation-duration".
+        //   overlay : false,
+        //   overlayClass : 'animsition-overlay-slide',
+        //   overlayParentElement : 'body',
+        //   transition: function(url){ window.location.href = url; }
+        // });
+
         $("#sidebar-menu a").each(function() {
             if (this.href == window.location.href) {
                 $(this).addClass("active");
@@ -18,13 +41,13 @@
         });
 
 
-        var cssRule =
-          "color: rgb(255, 32, 0);" +
-          "font-size: 32px;" +
-          "font-weight: bold;" +
-          "text-shadow: 1px 1px 5px rgb(0, 0, 0);" +
-          "filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);";
-        console.log("%cAtenção, acesso não autorizado!", cssRule);
+        // var cssRule =
+        //   "color: rgb(255, 32, 0);" +
+        //   "font-size: 32px;" +
+        //   "font-weight: bold;" +
+        //   "text-shadow: 1px 1px 5px rgb(0, 0, 0);" +
+        //   "filter: dropshadow(color=rgb(249, 162, 34), offx=1, offy=1);";
+        // console.log("%cAtenção, acesso não autorizado!", cssRule);
 
 
         
@@ -56,6 +79,58 @@
     });
 
 </script>
+
+<?php
+
+try {
+
+  $getRouteCurrent = Route::current();
+
+  if ($getRouteCurrent && $getRouteCurrent <> null) {
+    
+    $route_action_vet = $getRouteCurrent->getAction();
+    $getActionNamespace = $getRouteCurrent->getAction()['namespace'];
+    $controllerFull = $route_action_vet['controller'];
+
+    $controllerNameAndAction = class_basename($controllerFull);
+    list($controllerName, $actionName) = explode('@', $controllerNameAndAction);
+
+    $controllerName = strtolower(str_replace('Controller', '', $controllerName));
+    $actionName = strtolower($actionName);
+
+    $subModulos = str_replace($getActionNamespace, '', str_replace($controllerNameAndAction, '', $controllerFull));
+    $subModulos = explode('\\', $subModulos);
+    $subModulos = array_filter($subModulos);
+
+    $getModule = head($subModulos);
+    $subModulos = array_values($subModulos);
+    unset($subModulos[0]);
+
+    $caminhoCompletoModulos = '';
+    if (sizeof($subModulos)>0) {
+      $caminhoCompletoModulos = strtolower('/assets/app/js/' . $getModule . '/' . (implode('/', $subModulos)));
+    }
+    else{
+      $caminhoCompletoModulos = strtolower('/assets/app/js/' . $getModule);
+    }
+
+    if (stream_resolve_include_path(public_path().$caminhoCompletoModulos.'/geral.js')) {
+        echo '<script src=' . asset($caminhoCompletoModulos.'/geral.js') . '></script>';
+    }
+
+    if (stream_resolve_include_path(public_path().$caminhoCompletoModulos.'/'.$controllerName.'.js')) {
+        echo '<script src=' . asset($caminhoCompletoModulos.'/'.$controllerName.'.js') . '></script>';
+    }
+
+    if (stream_resolve_include_path(public_path().$caminhoCompletoModulos.'/'.$controllerName.'.'.$actionName.'.js')) {
+        echo '<script src=' . asset($caminhoCompletoModulos.'/'.$controllerName.'.'.$actionName.'.js') . '></script>';
+    }
+  }
+  
+} catch (Exception $e) {
+  //
+}
+?>
 
 <!-- extra js -->
 @yield('footer_page_extra')

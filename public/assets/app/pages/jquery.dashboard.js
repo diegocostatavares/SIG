@@ -69,7 +69,12 @@
 }(window.jQuery),
 
 //initializing
-function($) {
-    "use strict";
+// function($) {
+//     "use strict";
+//     $.Dashboard.init();
+// }(window.jQuery);
+
+
+$(document).ready(function() {
     $.Dashboard.init();
-}(window.jQuery);
+});

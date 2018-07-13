@@ -9,6 +9,7 @@
         </div>
     </div>
 </div>
+{{ \Session::forget('success') }}
 @endif
 
 
@@ -23,6 +24,7 @@
         </div>
     </div>
 </div>
+{{ \Session::forget('error') }}
 @endif
 
 
@@ -37,6 +39,7 @@
         </div>
     </div>
 </div>
+{{ \Session::forget('warning') }}
 @endif
 
 
@@ -51,6 +54,7 @@
         </div>
     </div>
 </div>
+{{ \Session::forget('info') }}
 @endif
 
 

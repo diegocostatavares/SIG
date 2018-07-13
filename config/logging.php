@@ -65,6 +65,12 @@ return [
             'driver' => 'errorlog',
             'level' => 'debug',
         ],
+
+        'erros_com_codigo' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/erros_com_codigo.log'),
+            'level' => 'debug',
+        ],
     ],
 
 ];

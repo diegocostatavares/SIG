@@ -5,10 +5,10 @@
 @section('page-title','ROOT')
 
 @section('breadcrumb')
-    <ol class="breadcrumb float-right">
+<!--     <ol class="breadcrumb float-right">
         <li class="breadcrumb-item"><a href="#">ROOT</a></li>
         <li class="breadcrumb-item active">Configurações</li>
-    </ol>
+    </ol> -->
 @endsection
 
 @section('conteudo')

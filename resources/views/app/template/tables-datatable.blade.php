@@ -2,7 +2,7 @@
 
 @section('titulo','TEMPLATE')
 
-
+@section('page-title','Datatable')
 
 @section('header_page_extra')
 <!-- DataTables -->
@@ -16,24 +16,6 @@
 
 
 @section('conteudo')
-
-<div class="row">
-    <div class="col-xl-12">
-        <div class="page-title-box">
-            <h4 class="page-title float-left">Datatable</h4>
-
-            <ol class="breadcrumb float-right">
-                <li class="breadcrumb-item"><a href="#">Template</a></li>
-                <li class="breadcrumb-item"><a href="#">Tables</a></li>
-                <li class="breadcrumb-item active">Datatable</li>
-            </ol>
-
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-<!-- end row -->
-
 
 <div class="row">
     <div class="col-12">

@@ -2,26 +2,9 @@
 
 @section('titulo','TEMPLATE')
 
+@section('page-title','Dashboard')
 
 @section('conteudo')
-
-<div class="row">
-    <div class="col-xl-12">
-        <div class="page-title-box">
-            <h4 class="page-title float-left">Dashboard</h4>
-
-            <ol class="breadcrumb float-right">
-                <li class="breadcrumb-item"><a href="#">Template</a></li>
-                <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
-                <li class="breadcrumb-item active">Dashboard</li>
-            </ol>
-
-            <div class="clearfix"></div>
-        </div>
-    </div>
-</div>
-<!-- end row -->
-
 
 <div class="row">
     <div class="col-xs-12 col-md-6 col-lg-6 col-xl-3">
@@ -308,6 +291,6 @@
 <script src="{{asset('assets/app/plugins/raphael/raphael-min.js')}}"></script>
 
 <!-- Page specific js -->
-<script src="{{asset('assets/app/pages/jquery.dashboard.js')}}"></script>
+<script src="{{asset('assets/app/pages/jquery.dashboard.js?1')}}"></script>
 
 @endsection

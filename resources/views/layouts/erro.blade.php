@@ -45,6 +45,10 @@
                 font-size: 36px;
                 padding: 20px;
             }
+            .subtitle {
+                font-size: 30px;
+                padding: 20px;
+            }
         </style>
     </head>
     <body>
@@ -52,6 +56,9 @@
             <div class="content">
                 <div class="title">
                     @yield('message')
+                </div>
+                <div class="subtitle">
+                    @include('errors.flash-message-deslogado')
                 </div>
             </div>
         </div>

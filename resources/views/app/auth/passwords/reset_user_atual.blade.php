@@ -5,11 +5,11 @@
 @section('page-title','ALTERAR MINHA SENHA')
 
 @section('breadcrumb')
-    <ol class="breadcrumb float-right">
+<!--     <ol class="breadcrumb float-right">
         <li class="breadcrumb-item"><a href="#">ADMIN</a></li>
         <li class="breadcrumb-item"><a href="#">Usuários</a></li>
         <li class="breadcrumb-item active">Alterar Minha Senha</li>
-    </ol>
+    </ol> -->
 @endsection
 
 @section('conteudo')

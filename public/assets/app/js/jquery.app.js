@@ -4,6 +4,36 @@
 * Module/App: Main Js
 */
 
+function backdrop_body() {
+
+  var backdrop_body = document.getElementById("backdrop_body");
+
+  if(!backdrop_body) {
+
+      $("body").addClass("body-overflow-hidden");
+    
+      var cover = document.createElement("div");
+      cover.setAttribute("id", "backdrop_body");
+      cover.style.height = "100%";
+      cover.style.width = "100%";
+      cover.style.backgroundColor = "black";
+      cover.style.opacity = "0.8";
+      cover.style.position = "fixed";
+      cover.style.top = "0px";
+      cover.style.left = "0px";
+      cover.style.zIndex = "1";
+
+      document.body.appendChild(cover);
+
+  }
+  else {
+
+      backdrop_body = document.getElementById("backdrop_body");
+      backdrop_body.parentNode.removeChild(backdrop_body);
+
+      $("body").removeClass("body-overflow-hidden");
+  }
+}
 
 !function($) {
     "use strict";
@@ -14,6 +44,11 @@
         this.$menuItem = $("#sidebar-menu a")
     };
     Sidemenu.prototype.openLeftBar = function() {
+
+      if(jQuery.browser.mobile === true){
+        backdrop_body(); 
+      }
+
       $("#wrapper").toggleClass("enlarged");
       $("#wrapper").addClass("forced");
 
@@ -219,7 +254,9 @@ var changeptype = function(){
     dh = $(document).height();
 
     if(jQuery.browser.mobile === true){
-        $("body").addClass("mobile").removeClass("fixed-left");
+        //$("body").addClass("mobile").removeClass("fixed-left");
+        // TIREI A REMOÇÃO DA CLASSE PRA FICAR SEMPRE FIXA...
+        $("body").addClass("mobile");
     }
 
     if(!$("#wrapper").hasClass("forced")){

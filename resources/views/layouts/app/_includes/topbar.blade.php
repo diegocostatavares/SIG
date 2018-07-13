@@ -5,7 +5,7 @@
     <div class="topbar-left">
         <a href="{{route('home')}}" class="logo">
             <i class="fa fa-home fa-2x icon-c-logo"></i>
-            <span>Empresa</span></a>
+            <span>SIG</span></a>
     </div>
 
     <nav class="navbar-custom">
@@ -129,7 +129,7 @@
             </li>
 
             <li class="float-left">
-                <button id="btn-fullscreen" class="button-menu-mobile open-left waves-light waves-effect">
+                <button id="btn-fullscreen" class="button-menu-mobile waves-light waves-effect">
                     <i class="zmdi zmdi-fullscreen"></i>
                 </button>
             </li>
